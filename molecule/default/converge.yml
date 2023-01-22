@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: "Include lab5.postgresql"
+      ansible.builtin.include_role:
+        name: "lab5.postgresql"

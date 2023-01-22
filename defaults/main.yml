@@ -1,0 +1,21 @@
+---
+# defaults file for postgresql
+postgresql_master_group_name: db_master
+postgresql_replica_group_name: db_replica
+postgresql_master_address: "192.168.2.101"
+postgresql_replica_address: 
+  - "192.168.2.102"
+postgresql_replica_user: replica
+postgresql_replica_password: root
+postgresql_data_dir: /var/lib/postgresql/12/main
+postgresql_custom_data_dir: /home/vagrant/postgresql
+postgresql_conf_dir: /etc/postgresql/12/main/
+postgresql_database_list:
+  - esta
+  - holla
+postgresql_user_list: 
+  - { name: testuser1, password: testpass123 }
+  - { name: testuser2, password: testpass124 }
+postgresql_user_database_list:
+  - { db: esta, user: testuser1 }
+  - { db: holla, user: testuser2 }
