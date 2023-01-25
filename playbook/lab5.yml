@@ -3,12 +3,8 @@
   hosts: db_master
   roles:
     - role: postgresql
-      vars:
-        postgresql_role: master
 
 - name: configure postgres replica node
   hosts: db_replica
   roles:
     - role: postgresql
-      vars:
-        postgresql_role: replica

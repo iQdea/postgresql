@@ -1,0 +1,11 @@
+postgresql_role: master
+postgresql_custom_data_dir: /home/vagrant/master/
+postgresql_database_list:
+  - esta1
+  - holla1
+postgresql_user_list: 
+  - { name: testuser1, password: testpass123 }
+  - { name: testuser2, password: testpass124 }
+postgresql_user_database_list:
+  - { db: esta1, user: testuser1 }
+  - { db: holla1, user: testuser2 }

@@ -1,0 +1,6 @@
+master:
+  hosts:
+    db_master:
+replica:
+  hosts:
+    db_replica:

@@ -1,0 +1,3 @@
+- src: https://gitlab.com/ansible_roles7/postgresql.git
+  version: master
+  name: postgresql

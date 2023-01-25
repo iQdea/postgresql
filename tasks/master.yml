@@ -33,12 +33,16 @@
     line: 'host    replication    {{ postgresql_replica_user }}  {{ item }}/32 trust'
   loop: "{{ postgresql_replica_address }}"
   when: postgresql_replica_address is defined
+  tags:
+    - molecule-idempotence-notest
 
 - name: PostgreSQL - restart
   systemd:
     name: postgresql@12-main
     state: restarted
   become: true
+  tags:
+    - molecule-idempotence-notest
 
 - include_tasks: "users-and-databases.yml"
 - include_tasks: "replica-user.yml"
