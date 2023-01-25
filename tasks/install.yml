@@ -1,0 +1,27 @@
+- name: Firewall - allow tcp 5432
+  become: yes
+  ufw:
+    rule: allow
+    port: 5432
+    proto: tcp
+    
+- name: Packages - install all
+  become: yes
+  apt:
+    name:
+      - postgresql
+      - postgresql-contrib
+      - libpq-dev
+      - acl
+      - python3-psycopg2
+    state: present
+    update_cache: true
+
+- name: PostgreSQL - configure data dir
+  become: yes
+  lineinfile: 
+    path: "{{ postgresql_conf_dir }}/postgresql.conf"
+    regexp: "^(.*)data_directory(.*)$"
+    line: "data_directory = '{{ postgresql_custom_data_dir }}'"
+    backrefs: yes
+  when: postgresql_custom_data_dir is defined

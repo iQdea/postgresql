@@ -1,0 +1,46 @@
+- name: PostgreSQL - create databases
+  postgresql_db:
+    state: present
+    name: "{{ item }}"
+  become: true 
+  become_user: postgres
+  with_items:
+    - "{{ postgresql_database_list }}"
+  when: postgresql_database_list is defined
+
+- name: PostgreSQL - create users
+  postgresql_user:
+    state: present
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+  become: true 
+  become_user: postgres
+  with_items:
+    - "{{ postgresql_user_list }}"
+  when: postgresql_user_list is defined
+
+- name: "PostgreSQL - grant access to users"
+  postgresql_privs:
+    type: database
+    database: "{{ item.db }}"
+    roles: "{{ item.user }}"
+    grant_option: no
+    privs: all
+  become: true
+  become_user: postgres
+  with_items:
+    - "{{ postgresql_user_database_list }}"
+  when: postgresql_user_database_list is defined
+  
+- name: "PostgreSQL - allow md5 connection for users"
+  postgresql_pg_hba:
+    dest: "{{ postgresql_conf_dir }}/pg_hba.conf"
+    contype: host
+    databases: all
+    method: md5
+    users: "{{ item.name }}"
+    create: true
+  become: true
+  become_user: postgres
+  with_items:
+    - "{{ postgresql_user_list }}"

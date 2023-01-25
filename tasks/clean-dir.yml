@@ -1,0 +1,16 @@
+- name: PostgreSQL - stop  
+  systemd:
+    name: postgresql@12-main
+    enabled: yes
+    state: stopped
+  become: true
+  tags:
+    - molecule-idempotence-notest
+
+- name: PostgreSQL - clear data dir
+  become: yes
+  file:
+    path: "{{ postgresql_custom_data_dir | default(postgresql_data_dir) }}"
+    state: absent
+  tags:
+    - molecule-idempotence-notest

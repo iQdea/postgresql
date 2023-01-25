@@ -1,0 +1,12 @@
+- name: PostgreSQL - create custom data dir
+  become: yes
+  file: 
+    dest: "{{ postgresql_custom_data_dir }}"
+    owner: postgres
+    group: postgres
+    mode: "0700"
+    recurse: yes
+    state: directory
+  when: postgresql_custom_data_dir is defined
+  tags:
+    - molecule-idempotence-notest

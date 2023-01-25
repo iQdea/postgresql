@@ -1,0 +1,7 @@
+- name: PostgreSQL - create replica user
+  postgresql_user:
+    name: "{{ postgresql_replica_user }}"
+    password: "{{ postgresql_replica_password }}"
+    role_attr_flags: replication
+  become: true
+  become_user: postgres

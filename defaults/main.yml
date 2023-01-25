@@ -7,8 +7,8 @@ postgresql_replica_address:
   - "192.168.2.102"
 postgresql_replica_user: replica
 postgresql_replica_password: root
-postgresql_data_dir: /var/lib/postgresql/12/main
-postgresql_custom_data_dir: /home/vagrant/postgresql
+postgresql_data_dir: /var/lib/postgresql/12/main/
+postgresql_custom_data_dir: /home/vagrant/postgresql/
 postgresql_conf_dir: /etc/postgresql/12/main/
 postgresql_database_list:
   - esta

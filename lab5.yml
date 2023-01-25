@@ -1,7 +1,5 @@
 ---
 - name: configure postgres master node
-  become: true
-  become_user: root
   hosts: db_master
   roles:
     - role: postgresql
@@ -9,8 +7,6 @@
         postgresql_role: master
 
 - name: configure postgres replica node
-  become: true
-  become_user: root
   hosts: db_replica
   roles:
     - role: postgresql
